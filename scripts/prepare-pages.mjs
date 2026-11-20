@@ -9,7 +9,7 @@ const output = resolve(outputArg);
 await mkdir(output, { recursive: true });
 if ((await readdir(output)).length) throw new Error('Output directory must be empty');
 
-for (const item of ['index.html', '.nojekyll', 'src', 'assets']) {
+for (const item of ['index.html', '.nojekyll', 'src', 'studio', 'assets']) {
   await cp(item, join(output, item), { recursive: true });
 }
 
@@ -26,7 +26,7 @@ async function versionModules(dir) {
     }
   }
 }
-await versionModules(join(output, 'src'));
+await Promise.all(['src', 'studio'].map(dir => versionModules(join(output, dir))));
 const htmlFile = join(output, 'index.html');
 const html = await readFile(htmlFile, 'utf8');
 const assetReference = /((?:href|src)\s*=\s*['"])(\.\.?\/[^'"\n]+?\.(?:js|css))(?:\?[^'"\n]*)?(['"])/g;

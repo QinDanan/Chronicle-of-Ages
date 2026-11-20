@@ -4,12 +4,13 @@
 
 | Path | Contents |
 | :--- | :--- |
-| `index.html`, `assets/` | Application entry, styles, icons and previews |
-| `src/` | Current application, API transport, storage and compatibility readers |
+| `index.html`, `studio/`, `assets/` | Application entry, Studio frontend, icons and previews |
+| `src/` | Simulation engine, API transport, storage and compatibility readers |
 | `tests/` | Current application and storage regression tests |
 | `scripts/prepare-pages.mjs` | Versioned static Pages artifact preparation |
 | `docs/` | Current engine and development documentation |
 | `archive/engines/` | Retired engines, associated tests and historical evaluations |
+| `archive/frontend/` | Previous browser interface |
 | `archive/snapshots/` | Original source packages and checksum manifests |
 
 ## Run and verify
@@ -27,7 +28,7 @@ Tests use synthetic responses or stored replay fixtures and require no service c
 
 ## Deployment
 
-The Pages workflow tests the repository, then copies only `index.html`, `.nojekyll`, `src/` and `assets/` into a versioned artifact. All local module imports receive the release commit as a cache version. Archive packages, evaluation data, documentation and tests are excluded from the deployed application.
+The Pages workflow tests the repository, then copies `index.html`, `.nojekyll`, `src/`, `studio/` and `assets/` into a versioned artifact. All local module imports receive the release commit as a cache version. Archive packages, evaluation data, documentation and tests are excluded from the deployed application.
 
 ## Local data
 

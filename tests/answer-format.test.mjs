@@ -22,7 +22,7 @@ test('plain prose stays intact without an imposed structure',()=>{
 test('core displays the waiting animation only for the world being queried',async()=>{
  const {readFileSync}=await import('node:fs');
  const {runInNewContext}=await import('node:vm');
- const source=readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
+ const source=readFileSync(new URL('../archive/frontend/src/app.js',import.meta.url),'utf8');
  const code=source.slice(source.indexOf('function renderCore(){'),source.indexOf('function currentMode('));
  const panel={style:{},innerHTML:''},log={scrollTop:0,scrollHeight:0};
  const state={chats:{branch:[{role:'user',content:'是什么？'}]},questionBusy:true,pendingChatKey:'branch',lang:'zh'};

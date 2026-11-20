@@ -44,8 +44,8 @@ test('malformed cyclic parent references cannot trap deletion in an infinite loo
  assert.deepEqual(Object.keys(result.chats),['Z']);
 });
 test('composer omits removed UI while inspector deletion keeps confirmation and storage checks',async()=>{
- const app=await readFile('src/app.js','utf8');
- const css=await readFile('assets/style.css','utf8');
+ const app=await readFile('archive/frontend/src/app.js','utf8');
+ const css=await readFile('archive/frontend/assets/style.css','utf8');
  assert.doesNotMatch(app,/composer-parent|composer-delete|composer-hint|timeline-density|delete-selected-worldline/);
  assert.doesNotMatch(css,/composer-parent|composer-delete|composer-hint|timeline-density/);
  assert.match(app,/if\(action==='delete-branch'\)\{deleteBranch\(btn\.dataset\.id\)/);

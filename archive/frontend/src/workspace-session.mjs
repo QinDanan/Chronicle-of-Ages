@@ -1,4 +1,4 @@
-import {BASELINE} from './data.js';
+import {BASELINE} from '../../../src/data.js';
 import {MIN_ZOOM,MAX_ZOOM} from './canvas.js';
 
 export const WORKSPACE_KEY='chronicle-of-ages-workspace-v1';

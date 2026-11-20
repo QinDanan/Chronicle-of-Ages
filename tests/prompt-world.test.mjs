@@ -134,7 +134,7 @@ test('syntax recovery preserves full prompt context and does not add semantic au
 });
 
 test('version-4 world prose renders inside the existing world-state view with safe text escaping',()=>{
- const source=readFileSync('src/app.js','utf8'),code=source.slice(source.indexOf('function renderWorldState('),source.indexOf('function renderOverview('));
+ const source=readFileSync('archive/frontend/src/app.js','utf8'),code=source.slice(source.indexOf('function renderWorldState('),source.indexOf('function renderOverview('));
  const branch=adaptPromptWorld({...world(),narrative:'<script>unsafe</script> 完整历史',worldState:'模型决定的世界终态'},{prompt:'Input',runId:'B'});
  const context={state:{lang:'zh'},formatAnswer:x=>String(x).replaceAll('<','&lt;'),renderCompletionNotes:()=>''};
  const html=runInNewContext(code+';renderWorldState(branch)',{...context,branch});

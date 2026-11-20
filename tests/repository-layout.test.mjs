@@ -9,15 +9,19 @@ import {mergeKnowledge} from '../src/exploration-knowledge.mjs';
 import {mergeKnowledge as priorMergeKnowledge} from '../archive/engines/minute/src/exploration-knowledge.mjs';
 
 test('all browser modules resolve within production source without archived dependencies',async()=>{
- const root=resolve('src'),pending=[resolve('src/app.js')],seen=new Set();
+ const roots=['src','studio'].map(dir=>resolve(dir)),seen=new Set();
+ const html=await readFile('index.html','utf8');
+ const entry=html.match(/<script type="module" src="([^"]+)"/)?.[1];
+ assert.ok(entry,'application entry is missing');
+ const pending=[resolve(entry)];
  while(pending.length){
   const file=pending.pop();if(seen.has(file))continue;seen.add(file);
-  assert.ok(relative(root,file)&&!relative(root,file).startsWith('..'),file);
+  assert.ok(roots.some(root=>relative(root,file)&&!relative(root,file).startsWith('..')),file);
   const source=await readFile(file,'utf8');
   const refs=[...source.matchAll(/\b(?:from\s*|import\s*(?:\(\s*)?)(['"])(\.\.?\/[^'"\n]+?\.m?js)(?:\?[^'"\n]*)?\1/g)];
   for(const [, ,ref]of refs)pending.push(resolve(dirname(file),ref));
  }
- const modules=(await readdir('src')).filter(name=>/\.m?js$/.test(name));
+ const modules=(await Promise.all(roots.map(root=>readdir(root)))).flat().filter(name=>/\.m?js$/.test(name));
  assert.equal(seen.size,modules.length,'unreachable production modules should be reviewed or archived');
 });
 
@@ -51,7 +55,7 @@ test('removing retired transport branches preserves current request bodies and c
 
 test('knowledge storage remains compatible after retiring the admission pipeline',()=>{
  const legacy={id:'legacy',firstYear:1850,nameEn:'Institution',nameZh:'制度',descriptionEn:'A retained old setting.',entity:'state',attribute:'institution',value:'established',evidenceIds:[]};
- const authored={id:'new',firstYear:2026,nameEn:'Model setting',nameZh:'模型设定',descriptionEn:'Complete model-authored prose. '.repeat(300),source:'prompt-llm'};
+ const authored={id:'new',firstYear:2026,nameEn:'Model setting',nameZh:'模型设定',descriptionEn:'Complete model-authored prose. '.repeat(300),source:'prompt-llm',discoveredAt:'2026-01-01T00:00:00.000Z'};
  for(const [before,incoming]of [[[],[legacy]],[[legacy],[{...legacy,id:'duplicate'}]],[[legacy],[authored]],[[authored],[{...authored,descriptionEn:'Updated setting'}]]]){
   assert.deepEqual(mergeKnowledge(before,incoming),priorMergeKnowledge(before,incoming));
  }

@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 
 test('worldline selection and overview show the same full-history view',()=>{
- const source=readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
+ const source=readFileSync(new URL('../archive/frontend/src/app.js',import.meta.url),'utf8');
  const code=source.slice(source.indexOf('function renderPanel(){'),source.indexOf('function renderArchive(){'));
  const branch={id:'b',parentId:null,anchorYear:123,events:[{id:'event',year:200,en:'Event',origin:'derived'}],facts:[{id:'fact'}],impacts:['Impact'],certainty:'low'};
  const state={tab:'world',mobilePanel:true,branches:[branch],lang:'en'};

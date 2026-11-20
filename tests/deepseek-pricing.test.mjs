@@ -180,7 +180,7 @@ test('legacy requests older than retained history or without cache counts remain
  }finally{globalThis.localStorage=old}
 });
 test('settings refreshes rate table from provider/model/endpoint instead of forcing manually entered DeepSeek prices',async()=>{
- const app=await readFile('src/app.js','utf8');
+ const app=await readFile('archive/frontend/src/app.js','utf8');
  const doc=await readFile('src/usage-dashboard.mjs','utf8');
  assert.ok(app.includes("endpoint:$('setting-endpoint')?.value||config.endpoint"));
  assert.match(app,/function refreshUsagePricing\(\)\{refreshUsageDashboard\(\)\}/);

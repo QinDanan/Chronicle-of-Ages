@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {WorldCanvas,MAX_ZOOM,fitCanvasText} from '../src/canvas.js';
+import {WorldCanvas,MAX_ZOOM,fitCanvasText} from '../archive/frontend/src/canvas.js';
 
 test('terminal events have a distinct hit target from the worldline selection tip',()=>{
  const ctx=new Proxy({measureText:()=>({width:40})},{get:(o,k)=>k in o?o[k]:()=>{}});

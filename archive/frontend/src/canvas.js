@@ -1,4 +1,4 @@
-import {BASELINE,FIRST_YEAR,LAST_YEAR,displayYear,eventLabel} from './data.js';
+import {BASELINE,FIRST_YEAR,LAST_YEAR,displayYear,eventLabel} from '../../../src/data.js';
 
 const clamp=(n,lo,hi)=>Math.min(hi,Math.max(lo,n));
 export const MIN_ZOOM=.025;

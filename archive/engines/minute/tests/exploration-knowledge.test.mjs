@@ -91,7 +91,7 @@ test('both old archives and new knowledge archives load without mutating macro-e
 });
 
 test('app routes core answers into branch knowledge and includes them in knowledge export and import',async()=>{
- const app=await readFile('src/app.js','utf8');
+ const app=await readFile('archive/frontend/src/app.js','utf8');
  assert.match(app,/await exploreCore\(/);
  assert.match(app,/branch\.knowledge=merged\.facts/);
  assert.match(app,/baselineKnowledge:state\.baselineKnowledge/);

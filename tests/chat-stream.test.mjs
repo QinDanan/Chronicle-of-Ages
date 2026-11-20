@@ -90,7 +90,7 @@ test('endpoints can explicitly decline streaming options or streaming without ch
 });
 
 test('busy overlay removes time copy in both languages and ignores elapsed time',()=>{
- const source=readFileSync('src/app.js','utf8'),code=source.slice(source.indexOf('function renderBusy('),source.indexOf('function handleClick('));
+ const source=readFileSync('archive/frontend/src/app.js','utf8'),code=source.slice(source.indexOf('function renderBusy('),source.indexOf('function handleClick('));
  for(const lang of ['zh','en']){
   const host={dataset:{},querySelector:selector=>selector==='[data-action="stop"]'?{addEventListener(){}}:null};
   const state={lang,busy:{input:'Test',status:'streaming',receivedChars:20,elapsedMs:1000}};

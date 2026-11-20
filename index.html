@@ -1,18 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
- <meta name="theme-color" content="#fafaf9">
- <meta name="description" content="Chronicle of Ages — an interactive Earth history timeline and alternative-worldline computation workspace.">
- <title>Chronicle of Ages — Unified Computation Matrix</title>
- <link rel="icon" href="./assets/app-icon.svg?v=20261112-pixel-icon" type="image/svg+xml" sizes="any">
- <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png?v=20261112-pixel-icon" sizes="180x180">
- <link rel="stylesheet" href="./assets/style.css?v=20261107-heading-composer">
- <script type="module" src="./src/app.js?v=20261112-pixel-icon"></script>
+ <meta name="color-scheme" content="dark light">
+ <meta name="theme-color" content="#0b0d13">
+ <meta name="description" content="Chronicle of Ages — explore Earth's history, rewrite a turning point and follow the worldline that unfolds.">
+ <title>Chronicle of Ages</title>
+ <link rel="icon" href="./assets/app-icon.svg" type="image/svg+xml">
+ <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+ <script>try{var t=localStorage.getItem('chronicle-of-ages-theme');if(t!=='dark'&&t!=='light')t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=t}catch(e){}</script>
+ <link rel="stylesheet" href="./studio/studio.css">
+ <script type="module" src="./studio/app.js"></script>
 </head>
 <body>
- <div id="app"><div class="splash"><img class="brand-monogram" src="./assets/app-icon.svg?v=20261112-pixel-icon" width="96" height="96" alt="Chronicle of Ages"><div class="splash-track"></div></div></div>
+ <div id="app"><div class="boot"><img src="./assets/app-icon.svg" width="56" height="56" alt=""><div class="boot-bar"><span></span></div></div></div>
+ <div id="modal-root"></div>
+ <div id="toast-root" aria-live="polite"></div>
+ <input type="file" id="import-file" accept="application/json,.json" hidden>
  <noscript>JavaScript is required to explore the chronology.</noscript>
 </body>
 </html>

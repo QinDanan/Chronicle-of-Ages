@@ -99,7 +99,7 @@ test('the public Core bridge retains older relevant dialogue and uses Flash for 
  try{await exploreCore({question:'How did the astronomical guild change?',branch,branches:[branch],history,config:{provider:'deepseek',endpoint:'https://api.deepseek.com/chat/completions',model:'deepseek-v4-pro',key:'test-only'}});assert.match(requests[0].messages.at(-1).content,/The guild was founded in 1500/);assert.equal(requests.length,1);assert.ok(requests.every(r=>r.model==='deepseek-flash'&&r.thinking.type==='enabled'&&!r.tools));}finally{globalThis.fetch=originalFetch;}
 });
 test('chat rejects a late knowledge conflict atomically instead of displaying an answer whose facts were discarded',async()=>{
- const source=await readFile('src/app.js','utf8'),code=source.slice(source.indexOf('async function submitQuestion('),source.indexOf('async function submitImage('));
+ const source=await readFile('archive/frontend/src/app.js','utf8'),code=source.slice(source.indexOf('async function submitQuestion('),source.indexOf('async function submitImage('));
  const existing=auditKnowledge({candidates:[candidate()],events:[event],makeId:()=> 'old'}).accepted;
  const b={knowledge:existing},state={chats:{},lang:'zh',branches:[b],baselineKnowledge:[],tab:'core'},form={querySelector:()=>({value:'a question'})};
  const context={state,active:()=>({...b,id:'B'}),configured:()=>true,config:{},renderPanel:()=>{},persist:()=>true,exploreCore:async()=>({knowledge:[{...existing[0],id:'new',value:'contradictory value'}],answer:'Incorrectly confirmed answer'}),mergeKnowledge,explainError:e=>e.code};

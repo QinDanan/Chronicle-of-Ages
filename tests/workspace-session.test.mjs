@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 import {BASELINE} from '../src/data.js';
-import {MAX_ZOOM} from '../src/canvas.js';
-import {WORKSPACE_KEY,captureWorkspace,restoreWorkspace,readWorkspace,writeWorkspace} from '../src/workspace-session.mjs';
+import {MAX_ZOOM} from '../archive/frontend/src/canvas.js';
+import {WORKSPACE_KEY,captureWorkspace,restoreWorkspace,readWorkspace,writeWorkspace} from '../archive/frontend/src/workspace-session.mjs';
 
 const branches=[{id:'B',events:[{id:'e'}],facts:[{id:'f'}],knowledge:[{id:'k'}]}];
 const state={branches,activeId:'B',tab:'event',selected:{kind:'event',id:'e',branchId:'B'},mobilePanel:true,input:'还没提交的历史输入',factQuery:'制度',databaseTab:'dialogue',coreDrafts:{B:'未发送的问题'},imageDrafts:{B:'未生成的图片描述'}};
@@ -72,7 +72,7 @@ test('unchanged snapshots do not rewrite storage on pointer or scroll notificati
 });
 
 test('startup applies the saved camera after world selection and restores scroll after first render',()=>{
- const source=readFileSync('src/app.js','utf8');
+ const source=readFileSync('archive/frontend/src/app.js','utf8');
  const code=source.slice(source.indexOf('function mount(){'),source.indexOf('function setupPanelResize(){'));
  const nodes=new Map(),events=[],frames=[];
  const element=()=>({textContent:'',scrollTop:0,addEventListener(){},querySelectorAll:()=>[]});
